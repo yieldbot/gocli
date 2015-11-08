@@ -1,6 +1,6 @@
 ## gocli
 
-[![Build Status][travis-image]][travis-url] [![GoDoc][godoc-image]][godoc-url]
+[![Build Status][travis-image]][travis-url] [![GoDoc][godoc-image]][godoc-url] [![Release][release-image]][release-url]
 
 A lightweight Go CLI library that provides subcommand handling, tidy usage and version printing.
 
@@ -88,3 +88,6 @@ For the full copyright and license information, please view the LICENSE.txt file
 
 [godoc-url]: https://godoc.org/github.com/yieldbot/gocli
 [godoc-image]: https://godoc.org/github.com/yieldbot/gocli?status.svg
+
+[release-url]: https://github.com/yieldbot/gocli/releases
+[release-image]: https://img.shields.io/badge/release-v1.0.0-blue.svg
