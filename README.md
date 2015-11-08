@@ -1,6 +1,6 @@
 ## gocli
 
-[![Build Status][travis-image]][travis-url]
+[![Build Status][travis-image]][travis-url] [![GoDoc][godoc-image]][godoc-url]
 
 A lightweight Go CLI library that provides subcommand handling, tidy usage and version printing.
 
@@ -85,3 +85,6 @@ For the full copyright and license information, please view the LICENSE.txt file
 
 [travis-url]: https://travis-ci.org/yieldbot/gocli
 [travis-image]: https://travis-ci.org/yieldbot/gocli.svg?branch=master
+
+[godoc-url]: https://godoc.org/github.com/yieldbot/gocli
+[godoc-image]: https://godoc.org/github.com/yieldbot/gocli?status.svg
