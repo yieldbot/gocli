@@ -52,14 +52,16 @@ func (cl *Cli) Init() {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
-	// cl.Flags = make(map[string]string)
-	// flag.VisitAll(func(f *flag.Flag) {
-	// 	cl.Flags[f.Name] = f.Value.String()
-	// })
 
 	// Init loggers
 	cl.LogOut = log.New(os.Stdout, "", log.LstdFlags)
 	cl.LogErr = log.New(os.Stderr, "", log.LstdFlags)
+
+	// Init flags
+	// cl.Flags = make(map[string]string)
+	// flag.VisitAll(func(f *flag.Flag) {
+	//  cl.Flags[f.Name] = f.Value.String()
+	// })
 
 	// Init args
 	// If length of the args more than one
@@ -82,10 +84,10 @@ func (cl *Cli) Init() {
 }
 
 // PrintVersion prints version information
-func (cl Cli) PrintVersion(ext bool) {
+func (cl Cli) PrintVersion(extra bool) {
 	var ver string
 
-	if ext == true {
+	if extra == true {
 		ver += fmt.Sprintf("App version : %s\n", cl.AppVersion)
 		ver += fmt.Sprintf("Go version  : %s", runtime.Version())
 	} else {
@@ -93,7 +95,6 @@ func (cl Cli) PrintVersion(ext bool) {
 	}
 
 	fmt.Println(ver)
-	os.Exit(0)
 }
 
 // PrintUsage prints usage info
@@ -179,7 +180,6 @@ func (cl Cli) PrintUsage() {
 	}
 
 	fmt.Println(usage)
-	os.Exit(0)
 }
 
 // strPadRight provides padding for strings
