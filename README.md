@@ -89,5 +89,5 @@ For the full copyright and license information, please view the LICENSE.txt file
 [godoc-url]: https://godoc.org/github.com/yieldbot/gocli
 [godoc-image]: https://godoc.org/github.com/yieldbot/gocli?status.svg
 
-[release-url]: https://github.com/yieldbot/gocli/releases
-[release-image]: https://img.shields.io/badge/release-v1.0.0-blue.svg
+[release-url]: https://github.com/yieldbot/gocli/releases/tag/v1.0.1
+[release-image]: https://img.shields.io/badge/release-v1.0.1-blue.svg
