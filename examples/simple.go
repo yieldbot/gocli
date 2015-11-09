@@ -1,7 +1,8 @@
+// A simple app
 package main
 
 import (
-"flag"
+	"flag"
 	"fmt"
 	"os"
 	"strings"
