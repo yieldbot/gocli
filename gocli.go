@@ -26,9 +26,6 @@ type Cli struct {
 	// AppDesc is the app description
 	AppDesc string
 
-	// AppUsage contains usage for the app
-	AppUsage string
-
 	// Command is the subcommand for the app
 	Command string
 
