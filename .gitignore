@@ -3,6 +3,7 @@
 .settings
 .coverrun
 .coverdata
+cover.out
 .env
 *.log
 *.heapsnapshot
