@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"runtime"
+	"sort"
 	"strings"
 )
 
@@ -110,10 +111,8 @@ func (cl Cli) PrintUsage() {
 		defValue string
 	}
 
-	flagList := make(map[string]*flagInfo)
-	maxlen := 0
-
 	// Find max length by command list
+	maxlen := 0
 	if len(cl.CommandList) > 0 {
 		for c := range cl.CommandList {
 			if len(c) > maxlen {
@@ -123,6 +122,8 @@ func (cl Cli) PrintUsage() {
 	}
 
 	// Iterate flags
+	flagList := make(map[string]*flagInfo)
+
 	flag.VisitAll(func(f *flag.Flag) {
 
 		// If flag name doesn't start with `test.` then
@@ -158,29 +159,43 @@ func (cl Cli) PrintUsage() {
 		}
 	})
 
-	// Add usage header and description
+	// Fixed flag list
+	flagListF := []string{}
+	for _, v := range flagList {
+		flagline := fmt.Sprintf("%s : %s", strPadRight(v.nameu, " ", maxlen), v.usage)
+		if v.defValue != "false" {
+			flagline += " (default \"" + v.defValue + "\")"
+		}
+		flagListF = append(flagListF, flagline)
+	}
+	sort.Strings(flagListF)
+
+	// Fixed command list
+	cmdListF := []string{}
+	for cn, cv := range cl.CommandList {
+		cmdListF = append(cmdListF, fmt.Sprintf("%s : %s", strPadRight(cn, " ", maxlen), cv))
+	}
+	sort.Strings(cmdListF)
+
+	// Header and description
 	usage := "Usage: " + cl.AppName + " [OPTIONS] COMMAND [arg...]\n\n"
 	if cl.AppDesc != "" {
 		usage += cl.AppDesc + "\n\n"
 	}
 
-	// Add options
-	if len(flagList) > 0 {
+	// Options
+	if len(flagListF) > 0 {
 		usage += "Options:\n"
-		for _, f := range flagList {
-			usage += "  " + strPadRight(f.nameu, " ", maxlen) + " : " + f.usage
-			if f.defValue != "false" {
-				usage += " (default \"" + f.defValue + "\")"
-			}
-			usage += "\n"
+		for _, f := range flagListF {
+			usage += fmt.Sprintf("  %s\n", f)
 		}
 	}
 
-	// Add commands
-	if len(cl.CommandList) > 0 {
+	// Commands
+	if len(cmdListF) > 0 {
 		usage += "\nCommands:\n"
-		for cn, cv := range cl.CommandList {
-			usage += "  " + strPadRight(cn, " ", maxlen) + " : " + cv + "\n"
+		for _, c := range cmdListF {
+			usage += fmt.Sprintf("  %s\n", c)
 		}
 	}
 
