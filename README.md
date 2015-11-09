@@ -26,6 +26,7 @@ func init() {
 }
 
 func main() {
+
   // Init cli
   cli = gocli.Cli{
     AppName:    "simple",
@@ -46,10 +47,12 @@ func main() {
   // Version
   if versionFlag {
     cli.PrintVersion(true)
+    os.Exit(0)
   }
 
   // Default
   cli.PrintUsage()
+  os.Exit(0)
 }
 ```
 
