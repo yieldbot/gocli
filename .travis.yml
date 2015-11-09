@@ -17,4 +17,4 @@ before_script:
 
 script:
   - go test -v ./...
-  - mkdir -p reports && go test -coverprofile=reports/cover.out && go tool cover -func=reports/cover.out
+  - go test -coverprofile=reports/cover.out && go tool cover -func=reports/cover.out
