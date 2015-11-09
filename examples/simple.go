@@ -25,6 +25,7 @@ func init() {
 }
 
 func main() {
+
 	// Init cli
 	cli = gocli.Cli{
 		AppName:    "simple",
