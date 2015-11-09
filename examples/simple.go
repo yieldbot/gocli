@@ -46,8 +46,10 @@ func main() {
 	// Version
 	if versionFlag {
 		cli.PrintVersion(true)
+		os.Exit(0)
 	}
 
 	// Default
 	cli.PrintUsage()
+	os.Exit(0)
 }
