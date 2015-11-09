@@ -13,6 +13,7 @@ import (
 	"log"
 	"os"
 	"runtime"
+	"strings"
 )
 
 // Cli represent command line interface
@@ -124,32 +125,36 @@ func (cl Cli) PrintUsage() {
 	// Iterate flags
 	flag.VisitAll(func(f *flag.Flag) {
 
-		// Set key by the flag usage for grouping
-		key := fmt.Sprint(f.Usage)
+		// If flag name doesn't start with `test.` then
+		if strings.Index(f.Name, "test.") != 0 {
 
-		// Init usage name
-		nameu := "-" + f.Name
-		if len(f.Name) > 2 {
-			nameu = "-" + nameu
-		}
+			// Set key by the flag usage for grouping
+			key := fmt.Sprint(f.Usage)
 
-		// If the flag exists then
-		if _, ok := flagList[key]; ok {
-			// Merge names
-			flagList[key].nameu += ", " + nameu
-		} else {
-			// Otherwise add the flag
-			flagList[key] = &flagInfo{
-				nameu:    nameu,
-				name:     f.Name,
-				usage:    f.Usage,
-				defValue: f.DefValue,
+			// Init usage name
+			nameu := "-" + f.Name
+			if len(f.Name) > 2 {
+				nameu = "-" + nameu
 			}
-		}
 
-		// Check and set maximum length for alignment
-		if len(flagList[key].nameu) > maxlen {
-			maxlen = len(flagList[key].nameu)
+			// If the flag exists then
+			if _, ok := flagList[key]; ok {
+				// Merge names
+				flagList[key].nameu += ", " + nameu
+			} else {
+				// Otherwise add the flag
+				flagList[key] = &flagInfo{
+					nameu:    nameu,
+					name:     f.Name,
+					usage:    f.Usage,
+					defValue: f.DefValue,
+				}
+			}
+
+			// Check and set maximum length for alignment
+			if len(flagList[key].nameu) > maxlen {
+				maxlen = len(flagList[key].nameu)
+			}
 		}
 	})
 
