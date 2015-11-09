@@ -96,7 +96,7 @@ func TestInit(t *testing.T) {
 	}
 }
 
-func ExamplePrintVersion() {
+func ExampleF_PrintVersion() {
 	var cli = gocli.Cli{
 		AppVersion: "1.0.0",
 	}
@@ -106,19 +106,16 @@ func ExamplePrintVersion() {
 	// Output: 1.0.0
 }
 
-func ExamplePrintVersionExtra() {
+func ExampleF_PrintVersionExtra() {
 	var cli = gocli.Cli{
 		AppVersion: "1.0.0",
 	}
 	cli.Init()
 
 	cli.PrintVersion(true)
-	// Output:
-	// App version : 1.0.0
-	// Go version  : go1.5.1
 }
 
-func ExamplePrintUsage() {
+func ExampleF_PrintUsage() {
 
 	// Init cli
 	var cli = gocli.Cli{
