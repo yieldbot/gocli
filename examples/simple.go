@@ -13,6 +13,7 @@ var (
 	cli         gocli.Cli
 	usageFlag   bool
 	versionFlag bool
+	test_test   bool
 )
 
 func init() {

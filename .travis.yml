@@ -12,9 +12,9 @@ install:
   - go get -t -v ./...
 
 before_script:
-  - gofmt -l . >&2; exit 1 || exit 0
-  - golint *.go
-  - go vet ./...
+  - OUT=`gofmt -l .`; if [ "$OUT" ]; then echo $OUT; exit 1; fi
+  - OUT=`golint ./...`; if [ "$OUT" ]; then echo $OUT; exit 1; fi
+  - OUT=`go vet ./...`; if [ "$OUT" ]; then echo $OUT; exit 1; fi
 
 script:
   - go test -v ./...
