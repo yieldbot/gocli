@@ -1,13 +1,13 @@
 .DS_Store
 .idea
 .settings
-.coverrun
-.coverdata
-cover.out
 .env
 *.log
 *.heapsnapshot
 *.pprof
+.coverrun
+.coverdata
+cover.out
 xunit.xml
 tmp/
 logs/
