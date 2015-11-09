@@ -12,7 +12,7 @@ install:
   - go get -t -v ./...
 
 before_script:
-  - gofmt -l . 1>&2
+  - >&2 gofmt -l .
   - golint *.go
   - go vet ./...
 
