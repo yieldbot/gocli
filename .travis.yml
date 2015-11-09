@@ -8,7 +8,6 @@ go:
 install:
   - go get github.com/golang/lint/golint
   - go get golang.org/x/tools/cmd/vet
-  - go get github.com/axw/gocov/gocov
   - go get -t -v ./...
 
 before_script:
@@ -18,4 +17,4 @@ before_script:
 
 script:
   - go test -v ./...
-  - gocov test | gocov report
+  - mkdir -p reports && go test -coverprofile=reports/cover.out && go tool cover -func=reports/cover.out
