@@ -1,6 +1,6 @@
 ## gocli
 
-[![Build Status][travis-image]][travis-url] [![GoDoc][godoc-image]][godoc-url] [![Release][release-image]][release-url]
+[![Build Status][travis-image]][travis-url] [![Coverage][coverage-image]][coverage-url] [![GoDoc][godoc-image]][godoc-url] [![Release][release-image]][release-url]
 
 A lightweight Go CLI library that provides subcommand handling, tidy usage and version printing.
 
