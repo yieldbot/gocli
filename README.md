@@ -94,3 +94,6 @@ For the full copyright and license information, please view the LICENSE.txt file
 
 [release-url]: https://github.com/yieldbot/gocli/releases/tag/v1.0.2
 [release-image]: https://img.shields.io/badge/release-v1.0.2-blue.svg
+
+[coverage-url]: https://coveralls.io/github/yieldbot/gocli?branch=master
+[coverage-image]: https://coveralls.io/repos/yieldbot/gocli/badge.svg?branch=master&service=github)
