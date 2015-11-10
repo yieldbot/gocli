@@ -7,7 +7,7 @@ A lightweight Go CLI library that provides subcommand handling, tidy usage and v
 ### Installation
 
 ```
-go get http://github.com/yieldbot/gocli
+go get github.com/yieldbot/gocli
 ```
 
 ### Usage
