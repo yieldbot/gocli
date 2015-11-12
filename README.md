@@ -38,21 +38,17 @@ func main() {
   }
   cli.Init()
 
-  // Echo command
+  // Run commands
   if cli.Command == "echo" {
+    // Echo command
     fmt.Println(strings.Join(cli.CommandArgs, " "))
-    os.Exit(0)
-  }
-
-  // Version
-  if versionFlag {
+  } else if versionFlag {
+    // Version
     cli.PrintVersion(true)
-    os.Exit(0)
+  } else {
+    // Default
+    cli.PrintUsage()
   }
-
-  // Default
-  cli.PrintUsage()
-  os.Exit(0)
 }
 ```
 
