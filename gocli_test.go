@@ -22,7 +22,7 @@ var (
 
 func init() {
 	// Init flags
-	flag.StringVar(&argFlag, "arg", "", "Arg flag")
+	flag.StringVar(&argFlag, "arg", "test", "Arg flag")
 	flag.BoolVar(&usageFlag, "h", false, "Display usage")
 	flag.BoolVar(&usageFlag, "help", false, "Display usage")
 	flag.BoolVar(&versionFlag, "version", false, "Display version information")
@@ -135,7 +135,7 @@ func ExampleF_PrintUsage() {
 	// test desc
 	//
 	// Options:
-	//   --arg         : Arg flag
+	//   --arg         : Arg flag (default "test")
 	//   -h, --help    : Display usage
 	//   -v, --version : Display version information
 	//
