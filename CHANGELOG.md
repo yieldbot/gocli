@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.0.3 (2015-11-12)
+
+* Add checking for empty default arg values
+* Update badges, readme and the example
+* Add goveralls integration
+
 ### 1.0.2 (2015-11-09)
 
 * Add sorting to options and commands
