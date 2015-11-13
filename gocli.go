@@ -163,7 +163,7 @@ func (cl Cli) PrintUsage() {
 	flagListF := []string{}
 	for _, v := range flagList {
 		flagline := fmt.Sprintf("%s : %s", strPadRight(v.nameu, " ", maxlen), v.usage)
-		if v.defValue != "false" {
+		if v.defValue != "false" && v.defValue != "" {
 			flagline += " (default \"" + v.defValue + "\")"
 		}
 		flagListF = append(flagListF, flagline)
