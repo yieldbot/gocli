@@ -52,7 +52,9 @@ func main() {
 }
 ```
 
-`$ go run examples/simple.go`
+```
+$ go run examples/simple.go
+```
 ```bash
 Usage: simple [OPTIONS] COMMAND [arg...]
 
@@ -66,13 +68,17 @@ Commands:
   echo          : Print the given arguments
 ```
 
-`$ go run examples/simple.go -v`
+```
+$ go run examples/simple.go -v
+```
 ```bash
 App version : 1.0.0
 Go version  : go1.5.1
 ```
 
-`$ go run examples/simple.go echo hello world`
+```
+$ go run examples/simple.go echo hello world
+```
 ```bash
 hello world
 ```
