@@ -135,7 +135,7 @@ func ExampleF_PrintUsage() {
 	// test desc
 	//
 	// Options:
-	//   --arg         : Arg flag (default "")
+	//   --arg         : Arg flag
 	//   -h, --help    : Display usage
 	//   -v, --version : Display version information
 	//
