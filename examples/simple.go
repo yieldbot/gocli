@@ -27,19 +27,19 @@ func main() {
 
 	// Init cli
 	cli = gocli.Cli{
-		AppName:    "simple",
-		AppVersion: "1.0.0",
-		AppDesc:    "A simple app",
-		CommandList: map[string]string{
+		Name:        "simple",
+		Version:     "1.0.0",
+		Description: "A simple app",
+		Commands: map[string]string{
 			"echo": "Print the given arguments",
 		},
 	}
 	cli.Init()
 
 	// Run commands
-	if cli.Command == "echo" {
+	if cli.SubCommand == "echo" {
 		// Echo command
-		fmt.Println(strings.Join(cli.CommandArgs, " "))
+		fmt.Println(strings.Join(cli.SubCommandArgs, " "))
 	} else if versionFlag {
 		// Version
 		cli.PrintVersion(true)

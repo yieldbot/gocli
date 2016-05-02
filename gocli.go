@@ -1,6 +1,6 @@
 /*
  * gocli
- * Copyright (c) 2015 Yieldbot, Inc. (http://github.com/yieldbot/gocli)
+ * Copyright (c) 2015 Yieldbot, Inc.
  * For the full copyright and license information, please view the LICENSE.txt file.
  */
 
@@ -19,32 +19,32 @@ import (
 
 // Cli represent command line interface
 type Cli struct {
-	// AppName is the app name
-	AppName string
+	// Name is the cli name
+	Name string
 
-	// AppVersion is the app version
-	AppVersion string
+	// Version is the cli version
+	Version string
 
-	// AppDesc is the app description
-	AppDesc string
+	// Description is the cli description
+	Description string
 
-	// Command is the subcommand for the app
-	Command string
+	// Commands contains the subcommand list of the cli
+	Commands map[string]string
 
-	// CommandArgs contains the args of the subcommand
-	CommandArgs []string
+	// SubCommand contains the runtime subcommand
+	SubCommand string
 
-	// CommandList contains the subcommand list of the app
-	CommandList map[string]string
+	// SubCommandArgs contains the args of the runtime subcommand
+	SubCommandArgs []string
+
+	// Flags contains flags
+	//Flags map[string]string
 
 	// LogOut is logger for stdout
 	LogOut *log.Logger
 
 	// LogErr is logger for stderr
 	LogErr *log.Logger
-
-	// Flags contains flags
-	//Flags map[string]string
 }
 
 // Init initializes Cli instance
@@ -73,12 +73,12 @@ func (cl *Cli) Init() {
 		for _, arg := range os.Args {
 
 			// If the arg is in command list then
-			if _, ok := cl.CommandList[arg]; ok {
-				cl.Command = arg // set as command
+			if _, ok := cl.Commands[arg]; ok {
+				cl.SubCommand = arg // set as command
 			} else {
 				// Otherwise add it to args
-				if cl.Command != "" {
-					cl.CommandArgs = append(cl.CommandArgs, arg)
+				if cl.SubCommand != "" {
+					cl.SubCommandArgs = append(cl.SubCommandArgs, arg)
 				}
 			}
 		}
@@ -90,10 +90,10 @@ func (cl Cli) PrintVersion(extra bool) {
 	var ver string
 
 	if extra == true {
-		ver += fmt.Sprintf("App version : %s\n", cl.AppVersion)
+		ver += fmt.Sprintf("App version : %s\n", cl.Version)
 		ver += fmt.Sprintf("Go version  : %s", runtime.Version())
 	} else {
-		ver = fmt.Sprintf("%s", cl.AppVersion)
+		ver = fmt.Sprintf("%s", cl.Version)
 	}
 
 	fmt.Println(ver)
@@ -113,8 +113,8 @@ func (cl Cli) PrintUsage() {
 
 	// Find max length by command list
 	maxlen := 0
-	if len(cl.CommandList) > 0 {
-		for c := range cl.CommandList {
+	if len(cl.Commands) > 0 {
+		for c := range cl.Commands {
 			if len(c) > maxlen {
 				maxlen = len(c)
 			}
@@ -172,15 +172,15 @@ func (cl Cli) PrintUsage() {
 
 	// Fixed command list
 	cmdListF := []string{}
-	for cn, cv := range cl.CommandList {
+	for cn, cv := range cl.Commands {
 		cmdListF = append(cmdListF, fmt.Sprintf("%s : %s", strPadRight(cn, " ", maxlen), cv))
 	}
 	sort.Strings(cmdListF)
 
 	// Header and description
-	usage := "Usage: " + cl.AppName + " [OPTIONS] COMMAND [arg...]\n\n"
-	if cl.AppDesc != "" {
-		usage += cl.AppDesc + "\n\n"
+	usage := "Usage: " + cl.Name + " [OPTIONS] COMMAND [arg...]\n\n"
+	if cl.Description != "" {
+		usage += cl.Description + "\n\n"
 	}
 
 	// Options

@@ -33,72 +33,72 @@ func TestInit(t *testing.T) {
 
 	// Init cli
 	var cli = gocli.Cli{
-		AppName:    "test",
-		AppVersion: "1.0.0",
-		AppDesc:    "test desc",
-		CommandList: map[string]string{
+		Name:        "test",
+		Version:     "1.0.0",
+		Description: "test desc",
+		Commands: map[string]string{
 			"cmd": "Test command",
 		},
 	}
 	cli.Init()
 
-	if cli.AppName != "test" {
-		t.Error("invalid AppName")
+	if cli.Name != "test" {
+		t.Error("invalid Name")
 	}
 
-	if cli.AppVersion != "1.0.0" {
-		t.Error("invalid AppVersion")
+	if cli.Version != "1.0.0" {
+		t.Error("invalid Version")
 	}
 
-	if cli.AppDesc != "test desc" {
-		t.Error("invalid AppDesc")
+	if cli.Description != "test desc" {
+		t.Error("invalid Description")
 	}
 
-	if cli.Command != "" {
-		t.Error("invalid Command")
+	if len(cli.Commands) != 1 {
+		t.Error("invalid Commands")
 	}
 
-	if len(cli.CommandArgs) > 0 {
-		t.Error("invalid CommandArgs")
+	if cli.Commands["cmd"] != "Test command" {
+		t.Error("invalid Commands")
 	}
 
-	if len(cli.CommandList) != 1 {
-		t.Error("invalid CommandList")
+	if cli.SubCommand != "" {
+		t.Error("invalid SubCommand")
 	}
 
-	if cli.CommandList["cmd"] != "Test command" {
-		t.Error("invalid CommandList")
+	if len(cli.SubCommandArgs) > 0 {
+		t.Error("invalid SubCommandArgs")
 	}
 
 	os.Args = append(os.Args, "cmd", "arg1")
 
 	// Init cli
 	var cli2 = gocli.Cli{
-		AppName:    "test",
-		AppVersion: "1.0.0",
-		AppDesc:    "test desc",
-		CommandList: map[string]string{
+		Name:        "test",
+		Version:     "1.0.0",
+		Description: "test desc",
+		Commands: map[string]string{
 			"cmd": "Test command",
 		},
 	}
 	cli2.Init()
 
-	if cli2.Command != "cmd" {
-		t.Error("invalid Command")
+	if cli2.SubCommand != "cmd" {
+		t.Error("invalid SubCommand")
 	}
 
-	if len(cli2.CommandArgs) != 1 {
-		t.Error("invalid CommandArgs")
+	if len(cli2.SubCommandArgs) != 1 {
+		t.Error("invalid SubCommandArgs")
 	}
 
-	if cli2.CommandArgs[0] != "arg1" {
-		t.Error("invalid CommandArgs arg")
+	if cli2.SubCommandArgs[0] != "arg1" {
+		t.Error("invalid SubCommandArgs arg")
 	}
 }
 
 func ExampleF_PrintVersion() {
 	var cli = gocli.Cli{
-		AppVersion: "1.0.0",
+		Version: "1.0.0",
 	}
 	cli.Init()
 
@@ -108,7 +108,7 @@ func ExampleF_PrintVersion() {
 
 func ExampleF_PrintVersionExtra() {
 	var cli = gocli.Cli{
-		AppVersion: "1.0.0",
+		Version: "1.0.0",
 	}
 	cli.Init()
 
@@ -119,10 +119,10 @@ func ExampleF_PrintUsage() {
 
 	// Init cli
 	var cli = gocli.Cli{
-		AppName:    "test",
-		AppVersion: "1.0.0",
-		AppDesc:    "test desc",
-		CommandList: map[string]string{
+		Name:        "test",
+		Version:     "1.0.0",
+		Description: "test desc",
+		Commands: map[string]string{
 			"cmd": "Test command",
 		},
 	}
