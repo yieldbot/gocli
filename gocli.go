@@ -8,7 +8,7 @@
 package gocli
 
 import (
-	_ "errors"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -225,4 +225,84 @@ func (cl Cli) PrintUsage() {
 	}
 
 	fmt.Println(usage)
+}
+
+// Table represent tabular data as a table
+type Table struct {
+	data     [][]string
+	colSizes map[int]int
+}
+
+// Data gets data
+func (t *Table) Data() [][]string {
+	return t.data
+}
+
+// SetData sets a data by the given row, column and value
+func (t *Table) SetData(row, col int, val string) error {
+
+	// Check row and column numbers
+	if row < 1 && col < 1 {
+		return errors.New("invalid row or column index")
+	}
+
+	// Increase the row capacity if it's necessary
+	if row > len(t.data) {
+		nt := make([][]string, row)
+		copy(nt, t.data)
+		t.data = nt
+	}
+
+	// Increase the column capacity if it's necessary
+	if col > len(t.data[row-1]) {
+		nr := make([]string, col)
+		copy(nr, t.data[row-1])
+		t.data[row-1] = nr
+	}
+
+	// Set the value
+	t.data[row-1][col-1] = val
+
+	// Set the column size for alignment
+	if t.colSizes == nil {
+		t.colSizes = make(map[int]int)
+	}
+
+	if len(val) > t.colSizes[col-1] {
+		t.colSizes[col-1] = len(val)
+	}
+
+	return nil
+}
+
+// AddRow adds a row data by the given row number and column values
+func (t *Table) AddRow(row int, cols ...string) error {
+
+	// Iterate rows and set data
+	for i, v := range cols {
+		if err := t.SetData(row, i+1, v); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// PrintData prints data
+func (t *Table) PrintData() {
+
+	if len(t.data) == 0 {
+		return
+	}
+
+	// Print data
+	var rowVal string
+	var colSize string
+	for _, row := range t.data {
+		rowVal = ""
+		for i, c := range row {
+			colSize = fmt.Sprintf("%d", t.colSizes[i])
+			rowVal += fmt.Sprintf("%-"+colSize+"s\t", c)
+		}
+		fmt.Println(rowVal)
+	}
 }

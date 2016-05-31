@@ -188,3 +188,57 @@ func ExampleF_PrintUsage() {
 	// Commands:
 	//   cmd           : Test command
 }
+
+func TestSetData(t *testing.T) {
+	// Create table
+	var table = gocli.Table{}
+	table.SetData(1, 1, "FOO")
+	table.SetData(1, 2, "BAR")
+	table.SetData(2, 1, "1")
+	table.SetData(2, 2, "2")
+
+	var tdata = table.Data()
+	if tdata[0][0] != "FOO" {
+		t.Error("invalid table data")
+	}
+	if tdata[0][1] != "BAR" {
+		t.Error("invalid table data")
+	}
+	if tdata[1][0] != "1" {
+		t.Error("invalid table data")
+	}
+	if tdata[1][1] != "2" {
+		t.Error("invalid table data")
+	}
+}
+
+func TestAddRow(t *testing.T) {
+	// Create table
+	var table = gocli.Table{}
+	table.AddRow(1, "FOO", "BAR")
+	table.AddRow(2, "1", "2")
+
+	var tdata = table.Data()
+	if tdata[0][0] != "FOO" {
+		t.Error("invalid table data")
+	}
+	if tdata[0][1] != "BAR" {
+		t.Error("invalid table data")
+	}
+	if tdata[1][0] != "1" {
+		t.Error("invalid table data")
+	}
+	if tdata[1][1] != "2" {
+		t.Error("invalid table data")
+	}
+}
+
+func ExampleF_PrintData() {
+	// Create table
+	var table = gocli.Table{}
+	table.AddRow(1, "FOO", "BAR")
+
+	table.PrintData()
+	// Output:
+	// FOO	BAR
+}
