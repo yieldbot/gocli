@@ -37,6 +37,9 @@ type Cli struct {
 	// SubCommandArgs contains the args of the runtime subcommand
 	SubCommandArgs []string
 
+	// SubCommandArgsMap contains the args of the runtime subcommand as mapped
+	SubCommandArgsMap map[string]string
+
 	// Flags contains flags
 	Flags map[string]string
 
@@ -66,19 +69,38 @@ func (cl *Cli) Init() {
 	})
 
 	// Init args
-	// If length of the args more than one
 	if len(os.Args) > 1 {
 
 		// Iterate the args
 		for _, arg := range os.Args {
-
 			// If the arg is in command list then
 			if _, ok := cl.Commands[arg]; ok {
 				cl.SubCommand = arg // set as command
 			} else {
-				// Otherwise add it to args
+				// Otherwise add it to subcommand args
 				if cl.SubCommand != "" {
 					cl.SubCommandArgs = append(cl.SubCommandArgs, arg)
+				}
+			}
+		}
+
+		// Init subcommand args map
+		cl.SubCommandArgsMap = make(map[string]string)
+		var curArg string
+		for _, v := range cl.SubCommandArgs {
+			// If it's an arg then
+			if strings.HasPrefix(v, "-") {
+				curArg = strings.TrimLeft(v, "-")
+				if len(curArg) > 0 {
+					cl.SubCommandArgsMap[curArg] = ""
+				}
+			} else {
+				// Otherwise add it to current arg or add it as arg
+				if len(curArg) > 0 {
+					cl.SubCommandArgsMap[curArg] = v
+					curArg = ""
+				} else {
+					cl.SubCommandArgsMap[v] = ""
 				}
 			}
 		}
