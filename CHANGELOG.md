@@ -1,5 +1,11 @@
 ## Changelog
 
+### v2.1.0 (2016-05-31)
+
+* Add Table
+* Add SubCommandArgsMap
+* Add Flags
+
 ### v2.0.0 (2016-05-02)
 
 * **[BREAKING CHANGE]** Renaming cli struct fields
