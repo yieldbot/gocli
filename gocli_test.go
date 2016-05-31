@@ -126,19 +126,19 @@ func TestInit_3(t *testing.T) {
 	}
 
 	if len(cli.SubCommandArgs) != 3 {
-		t.Error("invalid SubCommandArgs", cli.SubCommandArgs)
+		t.Error("invalid SubCommandArgs")
 	}
 
 	if cli.SubCommandArgs[0] != "--arg2" {
-		t.Error("invalid SubCommandArgs arg", cli.SubCommandArgs)
+		t.Error("invalid SubCommandArgs arg")
 	}
 
 	if cli.SubCommandArgsMap["arg2"] != "arg3" {
-		t.Error("invalid SubCommandArgsMap arg", cli.SubCommandArgsMap)
+		t.Error("invalid SubCommandArgsMap arg")
 	}
 
 	if _, ok := cli.SubCommandArgsMap["arg4"]; !ok {
-		t.Error("invalid SubCommandArgsMap arg", cli.SubCommandArgsMap)
+		t.Error("invalid SubCommandArgsMap arg")
 	}
 }
 
