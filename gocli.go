@@ -8,6 +8,7 @@
 package gocli
 
 import (
+	_ "errors"
 	"flag"
 	"fmt"
 	"log"
@@ -181,10 +182,12 @@ func (cl Cli) PrintUsage() {
 		}
 	})
 
+	var maxlenF = fmt.Sprintf("%d", maxlen)
+
 	// Fixed flag list
 	flagListF := []string{}
 	for _, v := range flagList {
-		flagline := fmt.Sprintf("%s : %s", strPadRight(v.nameu, " ", maxlen), v.usage)
+		flagline := fmt.Sprintf("%-"+maxlenF+"s : %s", v.nameu, v.usage)
 		if v.defValue != "false" && v.defValue != "" {
 			flagline += " (default \"" + v.defValue + "\")"
 		}
@@ -195,7 +198,7 @@ func (cl Cli) PrintUsage() {
 	// Fixed command list
 	cmdListF := []string{}
 	for cn, cv := range cl.Commands {
-		cmdListF = append(cmdListF, fmt.Sprintf("%s : %s", strPadRight(cn, " ", maxlen), cv))
+		cmdListF = append(cmdListF, fmt.Sprintf("%-"+maxlenF+"s : %s", cn, cv))
 	}
 	sort.Strings(cmdListF)
 
@@ -222,14 +225,4 @@ func (cl Cli) PrintUsage() {
 	}
 
 	fmt.Println(usage)
-}
-
-// strPadRight provides padding for strings
-func strPadRight(str, pad string, length int) string {
-	for {
-		str += pad
-		if len(str) > length {
-			return str[0:length]
-		}
-	}
 }
