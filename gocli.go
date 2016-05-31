@@ -90,7 +90,7 @@ func (cl Cli) PrintVersion(extra bool) {
 	var ver string
 
 	if extra == true {
-		ver += fmt.Sprintf("App version : %s\n", cl.Version)
+		ver += fmt.Sprintf("Bin Version : %s\n", cl.Version)
 		ver += fmt.Sprintf("Go version  : %s", runtime.Version())
 	} else {
 		ver = fmt.Sprintf("%s", cl.Version)
@@ -111,7 +111,7 @@ func (cl Cli) PrintUsage() {
 		defValue string
 	}
 
-	// Find max length by command list
+	// Find the longest command for alignment
 	maxlen := 0
 	if len(cl.Commands) > 0 {
 		for c := range cl.Commands {
@@ -123,39 +123,39 @@ func (cl Cli) PrintUsage() {
 
 	// Iterate flags
 	flagList := make(map[string]*flagInfo)
-
 	flag.VisitAll(func(f *flag.Flag) {
 
-		// If flag name doesn't start with `test.` then
-		if strings.Index(f.Name, "test.") != 0 {
+		// If the flag name starts with `test.` then
+		if strings.Index(f.Name, "test.") == 0 {
+			return
+		}
 
-			// Set key by the flag usage for grouping
-			key := fmt.Sprint(f.Usage)
+		// Set key by the flag usage for grouping
+		key := fmt.Sprint(f.Usage)
 
-			// Init usage name
-			nameu := "-" + f.Name
-			if len(f.Name) > 2 {
-				nameu = "-" + nameu
+		// Init usage name
+		nameu := "-" + f.Name
+		if len(f.Name) > 2 {
+			nameu = "-" + nameu
+		}
+
+		// If the flag exists then
+		if _, ok := flagList[key]; ok {
+			// Merge names
+			flagList[key].nameu += ", " + nameu
+		} else {
+			// Otherwise add the flag
+			flagList[key] = &flagInfo{
+				nameu:    nameu,
+				name:     f.Name,
+				usage:    f.Usage,
+				defValue: f.DefValue,
 			}
+		}
 
-			// If the flag exists then
-			if _, ok := flagList[key]; ok {
-				// Merge names
-				flagList[key].nameu += ", " + nameu
-			} else {
-				// Otherwise add the flag
-				flagList[key] = &flagInfo{
-					nameu:    nameu,
-					name:     f.Name,
-					usage:    f.Usage,
-					defValue: f.DefValue,
-				}
-			}
-
-			// Check and set maximum length for alignment
-			if len(flagList[key].nameu) > maxlen {
-				maxlen = len(flagList[key].nameu)
-			}
+		// Check and set maximum length for alignment
+		if len(flagList[key].nameu) > maxlen {
+			maxlen = len(flagList[key].nameu)
 		}
 	})
 

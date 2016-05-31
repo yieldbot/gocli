@@ -72,8 +72,8 @@ Commands:
 $ go run examples/simple.go -v
 ```
 ```bash
-App version : 1.0.0
-Go version  : go1.5.1
+Bin version : 1.0.0
+Go version  : go1.6
 ```
 
 ```
