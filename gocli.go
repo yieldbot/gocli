@@ -38,7 +38,7 @@ type Cli struct {
 	SubCommandArgs []string
 
 	// Flags contains flags
-	//Flags map[string]string
+	Flags map[string]string
 
 	// LogOut is logger for stdout
 	LogOut *log.Logger
@@ -60,10 +60,10 @@ func (cl *Cli) Init() {
 	cl.LogErr = log.New(os.Stderr, "", log.LstdFlags)
 
 	// Init flags
-	// cl.Flags = make(map[string]string)
-	// flag.VisitAll(func(f *flag.Flag) {
-	//  cl.Flags[f.Name] = f.Value.String()
-	// })
+	cl.Flags = make(map[string]string)
+	flag.VisitAll(func(f *flag.Flag) {
+		cl.Flags[f.Name] = f.Value.String()
+	})
 
 	// Init args
 	// If length of the args more than one
