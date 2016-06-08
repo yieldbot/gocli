@@ -1,5 +1,9 @@
 ## Changelog
 
+### v2.1.1 (2016-06-07)
+
+* Add 'v' removal to version output
+
 ### v2.1.0 (2016-05-31)
 
 * Add Table
