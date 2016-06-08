@@ -113,10 +113,10 @@ func (cl Cli) PrintVersion(extra bool) {
 	var ver string
 
 	if extra == true {
-		ver += fmt.Sprintf("Bin Version : %s\n", cl.Version)
+		ver += fmt.Sprintf("Bin Version : %s\n", strings.TrimPrefix(cl.Version, "v"))
 		ver += fmt.Sprintf("Go version  : %s", runtime.Version())
 	} else {
-		ver = fmt.Sprintf("%s", cl.Version)
+		ver = fmt.Sprintf("%s", strings.TrimPrefix(cl.Version, "v"))
 	}
 
 	fmt.Println(ver)
