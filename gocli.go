@@ -242,7 +242,7 @@ func (t *Table) Data() [][]string {
 func (t *Table) SetData(row, col int, val string) error {
 
 	// Check row and column numbers
-	if row < 1 && col < 1 {
+	if row < 1 || col < 1 {
 		return errors.New("invalid row or column index")
 	}
 
