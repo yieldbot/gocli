@@ -1,5 +1,9 @@
 ## Changelog
 
+### v2.1.2 (2016-08-11)
+
+* Fix row and column checking on SetData
+
 ### v2.1.1 (2016-06-07)
 
 * Add 'v' removal to version output
